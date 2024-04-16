@@ -8,3 +8,4 @@ I love Go
 
 [3. Перемножение матриц](l3/README.md)
 
+[4. Вычисление /pi и e.](l4/README.md)
