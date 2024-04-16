@@ -136,17 +136,12 @@ func kindaE(n int) float64 {
 }
 
 func calcNthTerm_E(n int) float64 {
-	// fn := float64(n)
-	// t1 := math.Pow(fn*2+3, fn+0.5)
-	// t2 := math.Pow(fn*2-1, fn-0.5)
-	// return t1 * t2 / math.Pow(fn*2+1, fn*2)
-	top := 1
-	bottom := 1
+	res := 1.0
 	for i := 0; i < intPow(2, n-1); i++ {
-		top *= intPow(2, n+1) - i*2
-		bottom *= intPow(2, n+1) - 1 - i*2
+		d := intPow(2, n+1) - i*2
+		res *= math.Pow(float64(d)/float64(d-1), 1/float64(intPow(2, n)))
 	}
-	return math.Pow(float64(top)/float64(bottom), 1/float64(intPow(2, n)))
+	return res
 }
 
 func intPow(x, n int) int {

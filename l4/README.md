@@ -10,4 +10,4 @@
 Выбраны:
 
 1. /pi = 2\cdot \prod^\infty_{n=1} \frac{4n^2}{4n^2 - 1}
-2. e = 1 + \sum^\infty_{n=1}\frac{1}{n!}
+2. e = 2\cdot \sqrt{\frac{4}{3}}\cdot\sqrt[4]{\frac{6\cdot 8}{5\cdot 7}}\cdot\sqrt[8]{\frac{10\cdot 12\cdot 14\cdot 16}{9\cdot 11\cdot 13\cdot 15}}\cdot\dots
