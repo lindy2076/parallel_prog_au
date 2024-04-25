@@ -12,8 +12,6 @@ type ResWithLock struct {
 	mu  sync.Mutex
 }
 
-const Pi = math.Pi
-
 var threads int = 2 * 12
 
 func main() {
@@ -128,7 +126,6 @@ func nForGiverErr_E(uErr float64) int {
 	n := 1
 	prevRes := kindaE(n)
 	for n = 2; math.Abs(prevRes-math.E) > uErr; n++ {
-		// prevRes *= calcNthTerm_E(n)
 		prevRes *= calcKthTerm_E(n)
 	}
 	return n - 1
@@ -137,7 +134,6 @@ func nForGiverErr_E(uErr float64) int {
 func kindaE(n int) float64 {
 	res := 2.0
 	for i := 1; i < n+1; i++ {
-		// res *= calcNthTerm_E(i)
 		res *= calcKthTerm_E(i)
 	}
 	return res
@@ -188,7 +184,7 @@ func parallelE(n, threads int) float64 {
 	var wg sync.WaitGroup
 	wg.Add(threads)
 
-	piRes := &ResWithLock{res: 2.0}
+	eRes := &ResWithLock{res: 2.0}
 
 	for thread := 1; thread < threads+1; thread++ {
 		go func(tNum int) {
@@ -196,14 +192,13 @@ func parallelE(n, threads int) float64 {
 
 			threadRes := 1.0
 			for ns := tNum; ns < n; ns += threads {
-				// threadRes *= calcNthTerm_E(ns)
 				threadRes *= calcKthTerm_E(ns)
 			}
-			piRes.mu.Lock()
-			defer piRes.mu.Unlock()
-			piRes.res *= threadRes
+			eRes.mu.Lock()
+			defer eRes.mu.Unlock()
+			eRes.res *= threadRes
 		}(thread)
 	}
 	wg.Wait()
-	return piRes.res
+	return eRes.res
 }
