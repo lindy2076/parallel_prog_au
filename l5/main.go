@@ -24,6 +24,7 @@ func main() {
 	fmt.Printf("INTERVAL IS [%d, %d]\n", m, n)
 	fmt.Println("PRIMES ARE:")
 	fmt.Println(findAllPrimesFromInterval(m, n, threads))
+
 	for t := 1; t < threads+1; t++ {
 		t1 := time.Now().UnixMicro()
 		findAllPrimesFromInterval(m, n, t)
@@ -39,7 +40,7 @@ func findAllPrimesFromInterval(m, n, threads int) []int {
 	var wg sync.WaitGroup
 
 	wg.Add(threads)
-	for t := 1; t < threads+1; t++ {
+	for t := 0; t < threads; t++ {
 		go func(tNum int) {
 			defer wg.Done()
 			var res []int
@@ -52,7 +53,7 @@ func findAllPrimesFromInterval(m, n, threads int) []int {
 			lock.Lock()
 			primes = append(primes, res...)
 			lock.Unlock()
-		}(t - 1)
+		}(t)
 	}
 	wg.Wait()
 	return primes
